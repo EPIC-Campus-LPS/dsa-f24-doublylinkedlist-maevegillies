@@ -1,8 +1,9 @@
 # Lab 6: Doubly Linked List
 
-## Objective
-- Create a `Node<E>` class using generics to hold a value and the prev/next node in the list
+## Objective.
+- Create a `Node<E>` class using generics to hold a value and the prev/next node in the list.
 - Using `Node`, implement a `DoublyLinkedList` class that implements the provided `List` interface.
+- Test your program by writing test cases using `JUnit` with 80% code coverage.
 
 ### Node<E> Class
 
@@ -45,9 +46,9 @@ You may add any private helper methods or private instance variables you need to
 You will at least need to a default constructor that creates an empty list.
 
 *Tip:* Create a new class called `DoublyLinkedList` then add `implements List` to the header. Then use the context actions
-to populate your class with all the required method headers and Javadoc comments. Since you are implementing an interface
-that uses generics, you will need to use `Object` in place of `E` for your program. If you run into errors when creating
-and manipulating node, _casting_ should help resolve the error.
+to populate your class with all the required method headers and Javadoc comments(this will save you a lot of time!). 
+Since you are implementing an interface that uses generics, you will need to use `Object` in place of `E` for your program. 
+If you run into errors when creating and manipulating node, _casting_ should help resolve the error.
 
 Your class should produce the stated output for the given program.
 **This is not a comprehensive test of the functionality of your class. You are responsible for rigorously testing your own program.**

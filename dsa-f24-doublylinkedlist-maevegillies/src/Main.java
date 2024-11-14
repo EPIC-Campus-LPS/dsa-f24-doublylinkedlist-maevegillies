@@ -2,13 +2,14 @@ public class Main {
     public static void main(String[] args) {
 //        Node<Integer> first = new Node<>(20);
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+        list.add(10);
         list.add(20);
         list.add(30);
-        list.add(45);
+        list.add(1, 25);
+        list.set(1, 45);
+        System.out.println(list.get(1));
         list.remove(1);
-
         System.out.println(list);
-
 
 
 

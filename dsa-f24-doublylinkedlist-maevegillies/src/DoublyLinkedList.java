@@ -12,7 +12,7 @@ public class DoublyLinkedList<E> implements List{
     }
 
     @Override
-    public void add(Object element) {
+    public void add(Object element) { //add a new element to the end of the list
         Node newNode = new Node(element);
         if (size == 0) {
             firstNode = newNode;
@@ -25,18 +25,18 @@ public class DoublyLinkedList<E> implements List{
         size ++;
     }
     @Override
-    public void add(int i, Object element) throws IndexOutOfBoundsException {
+    public void add(int i, Object element) throws IndexOutOfBoundsException { //add a new node at a given index
         try {
-            Node<E> currNode = firstNode;
-            for (int j = 1; j < i; j++) {
+            Node<E> currNode = firstNode; //creates node currNode and sets it to the firstNode
+            for (int j = 1; j < i; j++) { //traverses through the list and resets the currNode to the next node in the list
                 currNode = currNode.getNext();
             }
-            Node<E> newNode = new Node(element);
-            newNode.setNext(currNode.getNext());
-            newNode.setPrev(currNode);
-            currNode.getNext().setPrev(newNode);
-            currNode.setNext(newNode);
-            size++;
+            Node<E> newNode = new Node(element); //create a new node that takes in element
+            newNode.setNext(currNode.getNext()); //sets pointer to currNode's next node
+            newNode.setPrev(currNode); //sets prev pointer of newNode to currNode
+            currNode.getNext().setPrev(newNode); //sets the next node to currNode to the prev pointer of newNode
+            currNode.setNext(newNode); //points the currNode to newNode
+            size++; //increases the size
         } catch(Exception IndexOutOfBoundsException){
             throw new IndexOutOfBoundsException();
         }
@@ -44,7 +44,7 @@ public class DoublyLinkedList<E> implements List{
 
     @Override
     public void remove() {
-        firstNode = null;
+        firstNode = null; //sets the firstNode, lastnode, and size to 0
         lastNode = null;
         size = 0;
     }
@@ -52,7 +52,7 @@ public class DoublyLinkedList<E> implements List{
     @Override
     public Node remove(int i) throws IndexOutOfBoundsException {
         try {
-            Node<E> currNode = firstNode;
+            Node<E> currNode = firstNode; //
             for (int j = 0; j < i; j++) {
                 currNode = currNode.getNext();
             }

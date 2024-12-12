@@ -1,0 +1,192 @@
+/**
+ * Creates class with type E which instanstiates the size, firstNode and lastNode of the linkedlist
+ * Sets the size of the inital list to be zero and the length to the size of the list
+ */
+public class DoublyLinkedList<E> implements List {
+    private int size;
+    private Node firstNode;
+    private Node lastNode;
+
+    public DoublyLinkedList() {
+        this.size = 0;
+    }
+
+    public DoublyLinkedList(int length) {
+        this.size = length;
+    }
+
+    /**
+     * Adds an element to the end of the linked list
+     * The method checks to see if the size of the list is 0, if true, then makes the first and last node the newNode
+     * else, sets the nextnode to be newNode and connects the newNode to the last by setting the previous to the lastNode
+     * Increase size of the list
+     * @param element
+     */
+    
+    public void add(Object element) {
+        Node newNode = new Node(element);
+        if (this.size == 0) {
+            this.firstNode = newNode;
+            this.lastNode = newNode;
+        } else {
+            this.lastNode.setNext(newNode);
+            newNode.setPrev(this.lastNode);
+            this.lastNode = newNode;
+        }
+
+        ++this.size;
+    }
+
+    /**
+     * Adds an element at a specified index
+     * Traverses through the linked list until the index and sets currNode to the node at that index
+     * Creates a new Node
+     * Sets the newNode's previous traversal to currNode and the next traversal to the next value to currNode
+     * Sets the traversal going back to newNode from currNode.getNext(), then sets the next traversal to newNode
+     * Increases size
+     * @param i is index
+     * @param element is the value of the Node
+     * @throws IndexOutOfBoundsException if the given index is out of range of the linked list
+     */
+
+    public void add(int i, Object element) throws IndexOutOfBoundsException {
+        try {
+            Node<E> currNode = this.firstNode;
+
+            for(int j = 1; j < i; ++j) {
+                currNode = currNode.getNext();
+            }
+
+            Node<E> newNode = new Node(element);
+            newNode.setNext(currNode.getNext());
+            newNode.setPrev(currNode);
+            currNode.getNext().setPrev(newNode);
+            currNode.setNext(newNode);
+            ++this.size;
+        } catch (Exception var5) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Removes all values in the list by setting the first and last node to be null (bypassing all the values given before)
+     * Then sets the size of the list to be 0
+     */
+    
+    public void remove() {
+        this.firstNode = null;
+        this.lastNode = null;
+        this.size = 0;
+    }
+
+    /**
+     * Removes a node at a given index
+     * traverses through the list until i
+     * creaates a temporary node which creates a new node with the value of the currNode
+     * Rearranges the links to disconnect the currNode from the list
+     * Sets currNode's previous to skip over currNode and set it equal to the value after currNode
+     * Sets currNode's previous to skip over currNode and set it equal to the value before currNode
+     * decreases the size of the list
+     * @return the new value of currNode.getNext
+     * @throws IndexOutOfBoundsException if i is out of the indexes for the linked list
+     */
+
+    public Node remove(int i) throws IndexOutOfBoundsException {
+        try {
+            Node<E> currNode = this.firstNode;
+
+            for(int j = 0; j < i; ++j) {
+                currNode = currNode.getNext();
+            }
+
+            Node<E> temp2 = new Node(currNode);
+            currNode.getPrev().setNext(currNode.getNext());
+            currNode.getNext().setPrev(currNode.getPrev());
+            --this.size;
+            return temp2;
+        } catch (Exception var4) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * gets the value of a node at a specified index
+     * Iterates through list until at index i
+     * @return the value of currNode
+     * @throws IndexOutOfBoundsException if i is out of the index range of the list
+     */
+
+    public Node get(int i) throws IndexOutOfBoundsException {
+        try {
+            Node<E> currNode = this.firstNode;
+
+            for(int j = 0; j < i; ++j) {
+                currNode = currNode.getNext();
+            }
+
+            return currNode;
+        } catch (Exception var4) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * sets the value of a node at a given index
+     * if i is 0, then it just sets the first Node to be the element
+     * Otherwise, if i is greater than 0 but less than the size of the list, it sets the currNode to be the firstNode
+     * Iterates through list
+     * sets the value of currNode
+     * @throws IndexOutOfBoundsException
+     */
+    
+    public void set(int i, Object element) throws IndexOutOfBoundsException {
+        try {
+            if (i == 0) {
+                this.firstNode.setValue(element);
+            } else if (i > 0 && i < this.size) {
+                Node<E> currNode = this.firstNode;
+                for(int j = 0; j < i; ++j) {
+                    currNode = currNode.getNext();
+                }
+
+                currNode.setValue(element);
+            }
+
+        } catch (Exception var5) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * @return size of the list
+     */
+
+    public int size() {
+        return this.size;
+    }
+
+    /**
+     * checks to see if the list is empty
+     */
+
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    /**
+     * Method to turn the nodes into strings to print them out
+     * @return a string listing node values
+     */
+
+    public String toString() {
+        String s = "";
+        Node<E> n = this.firstNode;
+
+        for(int x = 0; x < this.size; ++x) {
+            s = s + String.valueOf(n) + " ";
+            n = n.getNext();
+        }
+
+        return s;
+    }
+}
